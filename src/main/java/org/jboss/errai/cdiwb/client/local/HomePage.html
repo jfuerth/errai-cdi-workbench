@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<link rel=stylesheet href="css/CdiWorkbench.css">
+<div data-field="main">
+  <h1>Errai CDI Workbench</h1>
+  <div data-field=busStatusWidget></div>
+
+  <div style="display: inline-block; width: 50%">
+    <h3>Running Jobs</h3>
+    <button data-field=jobListRefreshButton>Refresh</button>
+    <div data-field=runningJobsPanel style="width: 100%"></div>
+    <input data-field=fireEventClass placeholder="fully.qualified.class.Name"> <button data-field=startFiringButton>Start Firing</button>
+    <div data-field=jobServiceErrorMessage>Example Error Message</div>
+  </div>
+
+  <div style="display: inline-block; width: 50%">
+    <h3>CDI Observers</h3>
+    <div data-field=observersPanel></div>
+    <input data-field=observerEventClass placeholder="fully.qualified.class.Name"> <button data-field=startListeningButton>Start Listening</button>
+    <div data-field=observerErrorMessage>Example Error Message</div>
+  </div>
+
+</div>
