@@ -1,5 +1,5 @@
-Errai To-Do List Demo
-=====================
+Errai CDI Workbench
+===================
 
 This demo app allows you to experiment with dynamic creation and observation of CDI events within
 Errai.
