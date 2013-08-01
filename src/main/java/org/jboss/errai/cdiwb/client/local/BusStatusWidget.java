@@ -16,11 +16,15 @@
  */
 package org.jboss.errai.cdiwb.client.local;
 
+import javax.inject.Inject;
+
 import org.jboss.errai.bus.client.ErraiBus;
 import org.jboss.errai.bus.client.api.BusLifecycleEvent;
 import org.jboss.errai.bus.client.api.BusLifecycleListener;
 import org.jboss.errai.bus.client.api.ClientMessageBus;
 import org.jboss.errai.bus.client.framework.ClientMessageBusImpl;
+import org.jboss.errai.cdiwb.shared.SessionService;
+import org.jboss.errai.common.client.api.Caller;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -49,6 +53,8 @@ public class BusStatusWidget extends Composite implements BusLifecycleListener {
         ImageResource green();
     }
 
+    @Inject Caller<SessionService> sessionService;
+
     private final HorizontalPanel me = new HorizontalPanel();
     private final Resources resources = GWT.create(Resources.class);
     private final Image statusImage = new Image(resources.white());
@@ -56,6 +62,8 @@ public class BusStatusWidget extends Composite implements BusLifecycleListener {
     private final Button stopTrueButton = new Button("bus.stop(true)");
     private final Button stopFalseButton = new Button("bus.stop(false)");
     private final Button initButton = new Button("bus.init()");
+    private final Button killHttpSessionButton = new Button("Kill HTTP Session");
+    private final Button killQueueSessionButton = new Button("Kill Queue Session");
 
     public BusStatusWidget() {
         initWidget(me);
@@ -87,13 +95,49 @@ public class BusStatusWidget extends Composite implements BusLifecycleListener {
             }
         });
 
+        killHttpSessionButton.addClickHandler(new ClickHandler() {
+
+          @Override
+          public void onClick(ClickEvent event) {
+            sessionService.call().killServletSession();
+          }
+        });
+
+        killQueueSessionButton.addClickHandler(new ClickHandler() {
+
+          @Override
+          public void onClick(ClickEvent event) {
+            sessionService.call().killQueueSession();
+          }
+        });
+
         me.add(statusImage);
         me.add(statusLabel);
         me.add(stopFalseButton);
         me.add(stopTrueButton);
         me.add(initButton);
+        me.add(killHttpSessionButton);
+        me.add(killQueueSessionButton);
 
-        ((ClientMessageBus) ErraiBus.get()).addLifecycleListener(this);
+        ClientMessageBusImpl bus = (ClientMessageBusImpl) ErraiBus.get();
+        bus.addLifecycleListener(this);
+        switch (bus.getState()) {
+        case CONNECTED:
+          busOnline(null);
+          break;
+        case CONNECTING:
+          busAssociating(null);
+          break;
+        case CONNECTION_INTERRUPTED:
+          busDisassociating(null);
+          break;
+        case LOCAL_ONLY:
+          busOffline(null);
+          break;
+        case UNINITIALIZED:
+        default:
+          break;
+        }
     }
 
     @Override
@@ -112,11 +156,15 @@ public class BusStatusWidget extends Composite implements BusLifecycleListener {
     public void busOnline(BusLifecycleEvent e) {
         statusLabel.setText("Connected");
         statusImage.setResource(resources.green());
+        killHttpSessionButton.setEnabled(true);
+        killQueueSessionButton.setEnabled(true);
     }
 
     @Override
     public void busOffline(BusLifecycleEvent e) {
         statusLabel.setText("Connecting");
         statusImage.setResource(resources.yellow());
+        killHttpSessionButton.setEnabled(false);
+        killQueueSessionButton.setEnabled(false);
     }
 }

@@ -15,6 +15,13 @@ body {
 	font-weight: bold;
 }
 
+button {
+    border: 1px solid #f90;
+    border-radius: 0.6em;
+    background-color: #fb6;
+}
+
+
 h1 {
 	color: #f60;
 	font-size: 60px;
@@ -23,107 +30,14 @@ h1 {
 	text-align: center;
 }
 
-div.mainContentArea {
+div.column {
 	margin: auto;
 	border: 20px solid #fff;
 	box-shadow: 5px 5px 7px #333;
 	border-radius: 15px;
 	background-color: #fff;
-	width: 600px;
-}
-
-div.mainContentArea>input {
-	font-size: 40px;
-	width: 100%;
-	margin-bottom: 20px;
-}
-
-.itemsContainer {
-	width: 100%;
-}
-
-div.item {
-	width: 100%;
-	font-size: 35px;
-	text-align: left;
-	margin-top: 10px;
-	border-bottom: 1px solid #eee;
-	margin-bottom: 7px;
-}
-
-div.item input, div.item span.gwt-CheckBox {
-	width: 20px;
-	height: 32px;
-	margin-left: 5px;
-	vertical-align: top;
-}
-
-div.item span {
-	width: 85%;
 	display: inline-block;
-	margin-left: 6px;
-}
-
-div.item .done {
-	text-decoration: line-through;
-	color: #aaa;
-}
-
-div.mainContentArea button {
-	font-size: 20px;
-	margin-top: 20px;
-	margin-bottom: 10px;
-}
-
-div.signupForm, div.loginForm {
-	margin: auto;
-	border: 20px solid #fff;
-	box-shadow: 5px 5px 7px #333;
-	border-radius: 15px;
-	background-color: #fff;
-	width: 600px;
-	text-align: left;
-}
-
-div.signupForm label {
-	display: block;
-	padding-top: 1em;
-	color: #333;
-}
-
-div.signupForm input {
-	margin-left: 50px;
-	margin-top: 9px;
-	width: 400px;
-	font-size: 20px;
-}
-
-div.signupForm button {
-	display: block;
-	margin: auto;
-	margin-top: 1em;
-	margin-bottom: .5em;
-	font-size: 20px;
-}
-
-div.loginForm button {
-	display: block;
-	margin: auto;
-	margin-top: 1.5em;
-	margin-bottom: 1.5em;
-	font-size: 20px;
-}
-
-div.loginForm input {
-	display: block;
-	margin: auto;
-	margin-top: 15px;
-	width: 500px;
-	font-size: 20px;
-}
-
-div.loginForm p {
-	text-align: center;
+	width: 40%;
 }
 
 .error {
@@ -133,6 +47,54 @@ div.loginForm p {
 a {
 	color: #00f;
 	text-decoration: underline;
+}
+
+fieldset.capsule {
+    font-size: 1em;
+    padding: 0.5em;
+    border-radius: 1em;
+    border-width: 0;
+    width: 100%;
+}
+
+fieldset.capsule label, fieldset.capsule input, fieldset.capsule button {
+    font-size: inherit;
+    padding: 0.3em 0.4em;
+    margin: 0.1em 0.2em;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    border: 1px solid #f90;
+    background-color: #fff;
+}
+
+fieldset.capsule label {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+fieldset.capsule input {
+    margin-right: 0;
+    border-radius: 0.6em 0 0 0.6em;
+    width: 60%
+}
+
+fieldset.capsule input:focus {
+    outline: none;
+    background-color: #ffa;
+    background-color: rgba(255,255,210,0.5);
+}
+
+fieldset.capsule button {
+    margin-left: 0;
+    border-radius: 0 0.6em 0.6em 0;
+    background-color: #fb6;
+}
+
+fieldset.capsule button:active, fieldset.capsule button:focus {
+    background-color: #acf;
+    outline: none;
 }
 
 /* Don't forget the phones! */
