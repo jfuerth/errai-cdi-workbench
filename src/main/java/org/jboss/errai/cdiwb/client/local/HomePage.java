@@ -2,6 +2,7 @@ package org.jboss.errai.cdiwb.client.local;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.jboss.errai.bus.client.api.BusErrorCallback;
@@ -41,6 +42,13 @@ public class HomePage extends Composite {
   @Inject @DataField TextBox observerEventClass;
   @Inject @DataField Button startListeningButton;
   @Inject @DataField ListWidget<CdiObserver, CdiObserverWidget> observersPanel;
+  @Inject @DataField Label observerErrorMessage;
+
+  @PostConstruct
+  private void setup() {
+    jobServiceErrorMessage.setText("");
+    observerErrorMessage.setText("");
+  }
 
   @EventHandler("jobListRefreshButton")
   private void refreshJobList(ClickEvent e) {
