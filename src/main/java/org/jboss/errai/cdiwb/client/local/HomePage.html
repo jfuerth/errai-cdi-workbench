@@ -4,26 +4,28 @@
   <h1>Errai CDI Workbench</h1>
   <div data-field=busStatusWidget></div>
 
-  <div class=column>
-    <h3>Running Jobs on Server <button data-field=jobListRefreshButton style="float: right">Refresh</button></h3>
-    <div data-field=runningJobsPanel style="width: 100%"></div>
-    <fieldset class=capsule>
-      <label>New Event:</label>
-      <input data-field=fireEventClass placeholder="fully.qualified.class.Name">
-      <button data-field=startFiringButton>Start</button>
-    </fieldset>
-    <div data-field=jobServiceErrorMessage class=error>Example Error Message</div>
-  </div>
-
-  <div class=column>
-    <h3>Local CDI Observers</h3>
-    <div data-field=observersPanel style="width: 100%"></div>
-    <fieldset class=capsule>
-      <label>New Listener:</label>
-      <input data-field=observerEventClass placeholder="fully.qualified.class.Name">
-      <button data-field=startListeningButton>Start</button>
-    </fieldset>
-    <div data-field=observerErrorMessage class=error>Example Error Message</div>
+  <div class=columnContainer>
+    <div class=column>
+      <h3>Running Jobs on Server <button data-field=jobListRefreshButton style="float: right">Refresh</button></h3>
+      <div data-field=runningJobsPanel style="width: 100%"></div>
+      <fieldset class=capsule>
+        <label>New Event:</label>
+        <input data-field=fireEventClass placeholder="fully.qualified.class.Name">
+        <button data-field=startFiringButton>Start</button>
+      </fieldset>
+      <div data-field=jobServiceErrorMessage class=error>Example Error Message</div>
+    </div>
+  
+    <div class=column>
+      <h3>Local CDI Observers</h3>
+      <div data-field=observersPanel style="width: 100%"></div>
+      <fieldset class=capsule>
+        <label>New Listener:</label>
+        <input data-field=observerEventClass placeholder="fully.qualified.class.Name">
+        <button data-field=startListeningButton>Start</button>
+      </fieldset>
+      <div data-field=observerErrorMessage class=error>Example Error Message</div>
+    </div>
   </div>
 
 </div>

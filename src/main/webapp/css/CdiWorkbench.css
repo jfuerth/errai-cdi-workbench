@@ -30,14 +30,19 @@ h1 {
 	text-align: center;
 }
 
+div.columnContainer {
+    margin: 50px auto 0 auto;
+}
+
 div.column {
-	margin: auto;
+    margin-left: 20px;
 	border: 20px solid #fff;
 	box-shadow: 5px 5px 7px #333;
 	border-radius: 15px;
 	background-color: #fff;
 	display: inline-block;
 	width: 40%;
+	vertical-align: top;
 }
 
 .error {
@@ -55,6 +60,7 @@ fieldset.capsule {
     border-radius: 1em;
     border-width: 0;
     width: 100%;
+    white-space: nowrap;
 }
 
 fieldset.capsule label, fieldset.capsule input, fieldset.capsule button {
