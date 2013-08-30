@@ -24,19 +24,7 @@
 
   <developers>
     <developer>
-      <name>Mike Brock</name>
-    </developer>
-    <developer>
-      <name>Christian Sadilek</name>
-    </developer>
-    <developer>
       <name>Jonathan Fuerth</name>
-    </developer>
-    <developer>
-      <name>Lincoln Baxter, III</name>
-    </developer>
-    <developer>
-      <name>Erik Jan de Wit</name>
     </developer>
   </developers>
 
@@ -63,6 +51,7 @@
     <maven.gwt.plugin.version>2.5.1</maven.gwt.plugin.version>
     <jetty.version>6.1.25</jetty.version>
     <jboss-as-maven-plugin.version>7.4.Final</jboss-as-maven-plugin.version>
+    <errai.version>2.4.0-SNAPSHOT</errai.version>
   </properties>
 
   <dependencyManagement>
@@ -71,7 +60,7 @@
       <dependency>
         <groupId>org.jboss.errai.bom</groupId>
         <artifactId>errai-version-master</artifactId>
-        <version>${project.version}</version>
+        <version>${errai.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -79,7 +68,7 @@
       <dependency>
         <groupId>org.jboss.errai</groupId>
         <artifactId>errai-parent</artifactId>
-        <version>${project.version}</version>
+        <version>${errai.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -96,6 +85,7 @@
   </dependencyManagement>
 
   <dependencies>
+  
     <dependency>
       <groupId>org.jboss.errai</groupId>
       <artifactId>errai-javaee-all</artifactId>
@@ -205,7 +195,7 @@
           <!-- Exclude GWT client local classes from the deployment, lest 
             classpath scanners such as Hibernate and Weld get confused when the webapp 
             is bootstrapping. -->
-          <packagingExcludes>**/javax/**/*.*,**/client/local/**/*.class</packagingExcludes>
+          <packagingExcludes>**/javax/**/*.*,**/client/**/*.class</packagingExcludes>
           <warSourceExcludes>WEB-INF/web.xml</warSourceExcludes>
         </configuration>
       </plugin>
@@ -249,7 +239,7 @@
             <configuration>
               <resources>
                 <resource>
-                  <directory>src/main/java/org/jboss/errai/cdiwb/client/local/css</directory>
+                  <directory>src/main/java/org/jboss/errai/cdiwb/client/css</directory>
                   <filtering>false</filtering>
                 </resource>
               </resources>

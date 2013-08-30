@@ -1,4 +1,4 @@
-package org.jboss.errai.cdiwb.client.local;
+package org.jboss.errai.cdiwb.client;
 
 import java.util.List;
 

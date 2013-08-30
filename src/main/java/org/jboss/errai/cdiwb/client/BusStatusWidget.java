@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.errai.cdiwb.client.local;
+package org.jboss.errai.cdiwb.client;
 
 import javax.inject.Inject;
 
