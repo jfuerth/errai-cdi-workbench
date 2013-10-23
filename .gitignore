@@ -8,3 +8,5 @@ src/main/webapp/CdiWorkbench/
 src/main/webapp/WEB-INF/classes/
 src/main/webapp/WEB-INF/deploy/
 src/main/gwt-unitCache/
+war
+gwt-unitCache

@@ -5,7 +5,7 @@
   <name>Errai CDI Workbench</name>
   <groupId>org.jboss.errai.cdiwb</groupId>
   <artifactId>errai-cdi-workbench</artifactId>
-  <version>2.4.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <url>http://jboss.org/errai/errai</url>
@@ -51,7 +51,8 @@
     <maven.gwt.plugin.version>2.5.1</maven.gwt.plugin.version>
     <jetty.version>6.1.25</jetty.version>
     <jboss-as-maven-plugin.version>7.4.Final</jboss-as-maven-plugin.version>
-    <errai.version>2.4.0-SNAPSHOT</errai.version>
+    <uberfire.version>0.4.0-SNAPSHOT</uberfire.version>
+    <errai.version>2.4.2-SNAPSHOT</errai.version>
   </properties>
 
   <dependencyManagement>
@@ -73,6 +74,14 @@
         <scope>import</scope>
       </dependency>
 
+      <dependency>
+        <groupId>org.uberfire</groupId>
+        <artifactId>uberfire</artifactId>
+        <version>${uberfire.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
       <!-- Question: should a project have to import this too? Could errai-bom should import it recursively? -->
       <dependency>
         <groupId>org.jboss.spec</groupId>
@@ -86,6 +95,66 @@
 
   <dependencies>
   
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-js</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-server</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-security-client</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-security-server</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-backend-server</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-nio2-fs</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-nio2-jgit</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-client-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-widgets-core-client</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-widgets-commons</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-widget-markdown</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.uberfire</groupId>
+      <artifactId>uberfire-workbench</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.jboss.errai</groupId>
       <artifactId>errai-javaee-all</artifactId>
@@ -105,6 +174,10 @@
     
     <!-- TODO figure out how to force all these things to provided scope without doing it explicitly in EVERY SINGLE ERRAI PROJECT!!!!111!!!!1 -->
     <!-- Don't deploy any of this -->
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><scope>provided</scope></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-log4j12</artifactId><scope>provided</scope></dependency>
+    <dependency><groupId>log4j</groupId><artifactId>log4j</artifactId><scope>provided</scope></dependency>
+
     <dependency><groupId>com.google.guava</groupId><artifactId>guava-gwt</artifactId><scope>provided</scope></dependency>
     <dependency><groupId>hsqldb</groupId><artifactId>hsqldb</artifactId><scope>provided</scope></dependency>
     <dependency><groupId>javax.annotation</groupId><artifactId>jsr250-api</artifactId><scope>provided</scope></dependency>
@@ -138,7 +211,6 @@
 
     
     <!-- These are pulled in transitively through errai-bus, but will be removed when we address ERRAI-534 -->
-    <dependency><groupId>org.jboss.netty</groupId><artifactId>netty</artifactId><scope>provided</scope></dependency>
     <dependency><groupId>org.jboss.errai.io.netty</groupId><artifactId>netty</artifactId><scope>provided</scope></dependency>
 
     <!-- And finally, add this -->
@@ -160,7 +232,7 @@
         <configuration>
           <inplace>true</inplace>
           <noServer>true</noServer>
-          <strict>false</strict> <!-- EEK. The HibernateValidator module contains non-translatable code. Need to disable strict compile. -->
+          <strict>true</strict> <!-- EEK. The HibernateValidator module contains non-translatable code. Need to disable strict compile. -->
           <runTarget>http://localhost:8080/${project.artifactId}/</runTarget>
           <extraJvmArgs>-Xmx1g -Xms756m -XX:MaxPermSize=256m -XX:CompileThreshold=1000</extraJvmArgs>
           <hostedWebapp>src/main/webapp/</hostedWebapp>
@@ -196,7 +268,6 @@
             classpath scanners such as Hibernate and Weld get confused when the webapp 
             is bootstrapping. -->
           <packagingExcludes>**/javax/**/*.*,**/client/**/*.class</packagingExcludes>
-          <warSourceExcludes>WEB-INF/web.xml</warSourceExcludes>
         </configuration>
       </plugin>
 

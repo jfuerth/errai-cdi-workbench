@@ -3,4 +3,9 @@
    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
       http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
 
+  <interceptors>
+    <class>org.uberfire.security.server.authz.cdi.RolesInterceptor</class>
+    <class>org.uberfire.security.server.authz.cdi.TraitInterceptor</class>
+  </interceptors>
+
 </beans>

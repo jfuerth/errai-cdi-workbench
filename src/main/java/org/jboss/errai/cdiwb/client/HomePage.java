@@ -12,8 +12,6 @@ import org.jboss.errai.cdiwb.shared.ServerJobService;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
 import org.jboss.errai.ui.client.widget.ListWidget;
-import org.jboss.errai.ui.nav.client.local.DefaultPage;
-import org.jboss.errai.ui.nav.client.local.Page;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
@@ -25,7 +23,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
 @Templated("#main")
-@Page(path="home", role = DefaultPage.class)
 public class HomePage extends Composite {
 
   @Inject private Caller<ServerJobService> jobService;
