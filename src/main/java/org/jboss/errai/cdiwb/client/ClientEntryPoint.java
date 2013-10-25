@@ -51,25 +51,37 @@ public class ClientEntryPoint {
   private void setupMenu(@Observes final ApplicationReadyEvent event) {
     final PerspectiveActivity defaultPerspective = getDefaultPerspectiveActivity();
 
-    final Menus menus = newTopLevelMenu("Home").respondsWith(new Command() {
-      @Override
-      public void execute() {
-        if (defaultPerspective != null) {
-          placeManager.goTo(new DefaultPlaceRequest(defaultPerspective.getIdentifier()));
-        }
-        else {
-          Window.alert("Default perspective not found.");
-        }
-      }
-    }).endMenu().newTopLevelMenu("Perspectives").withItems(getPerspectives()).endMenu().newTopLevelMenu("Screens")
-            .withItems(getScreens()).endMenu().newTopLevelMenu("Logout").position(MenuPosition.RIGHT)
-            .respondsWith(new Command() {
+    final Menus menus =
+    newTopLevelMenu("Home")
+      .respondsWith(new Command() {
+              @Override
+              public void execute() {
+                if (defaultPerspective != null) {
+                  placeManager.goTo(new DefaultPlaceRequest(defaultPerspective.getIdentifier()));
+                }
+                else {
+                  Window.alert("Default perspective not found.");
+                }
+              }
+            })
+      .endMenu()
+    .newTopLevelMenu("Perspectives")
+      .withItems(getPerspectives())
+      .endMenu()
+    .newTopLevelMenu("Screens")
+      .withItems(getScreens())
+      .endMenu()
+    .newTopLevelMenu("Logout")
+      .position(MenuPosition.RIGHT)
+      .respondsWith(new Command() {
               @Override
               public void execute() {
                 Window.alert("Not implemented! You're here to stay!");
 //                redirect(GWT.getModuleBaseURL() + "uf_logout");
               }
-            }).endMenu().build();
+            })
+      .endMenu()
+    .build();
 
     menubar.addMenus(menus);
   }
