@@ -16,8 +16,6 @@
 
 package org.jboss.errai.cdiwb.server;
 
-import static org.uberfire.backend.server.repositories.SystemRepository.SYSTEM_REPO;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -26,7 +24,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.errai.common.client.api.Assert;
-import org.uberfire.backend.repositories.Repository;
 import org.uberfire.commons.cluster.ClusterServiceFactory;
 import org.uberfire.io.IOService;
 import org.uberfire.io.impl.IOServiceDotFileImpl;
@@ -59,12 +56,6 @@ public class ApplicationScopedProducer {
     @Named("ioStrategy")
     public IOService ioService() {
         return Assert.notNull(ioService);
-    }
-
-    @Produces
-    @Named("system")
-    public Repository systemRepository() {
-        return Assert.notNull(SYSTEM_REPO);
     }
 
 }
