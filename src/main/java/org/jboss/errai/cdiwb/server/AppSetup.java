@@ -1,14 +1,17 @@
 package org.jboss.errai.cdiwb.server;
 
 import java.util.HashMap;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import org.uberfire.commons.services.cdi.Startup;
-import org.uberfire.commons.services.cdi.StartupType;
 import org.uberfire.backend.repositories.Repository;
 import org.uberfire.backend.repositories.RepositoryService;
+import org.uberfire.commons.services.cdi.ApplicationStarted;
+import org.uberfire.commons.services.cdi.Startup;
+import org.uberfire.commons.services.cdi.StartupType;
 
 //This is a temporary solution when running in PROD-MODE as /webapp/.niogit/system.git folder
 //is not deployed to the Application Servers /bin folder. This will be remedied when an
@@ -22,6 +25,8 @@ public class AppSetup {
     private static final String PLAYGROUND_ORIGIN = "https://github.com/guvnorngtestuser1/guvnorng-playground.git";
     private static final String PLAYGROUND_UID = "guvnorngtestuser1";
     private static final String PLAYGROUND_PWD = "test1234";
+
+    @Inject private Event<ApplicationStarted> applicationStarted;
 
     @Inject
     private RepositoryService repositoryService;
@@ -37,6 +42,9 @@ public class AppSetup {
                                                     put( "crypt:password", PLAYGROUND_PWD );
                                                 }} );
         }
+
+        System.out.println("Firing ApplicationStarted");
+        applicationStarted.fire(new ApplicationStarted());
     }
 
 }
