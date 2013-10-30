@@ -221,6 +221,7 @@
   </dependencies>
 
   <build>
+
     <resources>
       <resource>
         <directory>src/main/java</directory>
@@ -228,13 +229,9 @@
       <resource>
         <directory>src/main/resources</directory>
       </resource>
-      <resource>
-        <directory>target/generated-sources/annotations</directory>
-      </resource>
     </resources>
-    <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+
     <plugins>
-    
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
