@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -49,6 +48,7 @@ public class ClientEntryPoint {
   private ActivityManager activityManager;
 
   private void setupMenu(@Observes final ApplicationReadyEvent event) {
+    System.out.println("ApplicationReadyEvent! setupMenu is starting...");
     final PerspectiveActivity defaultPerspective = getDefaultPerspectiveActivity();
 
     final Menus menus =
@@ -84,6 +84,8 @@ public class ClientEntryPoint {
     .build();
 
     menubar.addMenus(menus);
+
+    System.out.println("setupMenu is returning now");
   }
 
   private List<MenuItem> getScreens() {
@@ -117,6 +119,7 @@ public class ClientEntryPoint {
       screens.add(item);
     }
 
+    System.out.println("getScreens is returning " + screens);
     return screens;
   }
 
@@ -136,16 +139,16 @@ public class ClientEntryPoint {
       perspectives.add(item);
     }
 
+    System.out.println("getPerspectives returning " + perspectives);
     return perspectives;
   }
 
   private PerspectiveActivity getDefaultPerspectiveActivity() {
     PerspectiveActivity defaultPerspective = null;
     final Collection<IOCBeanDef<PerspectiveActivity>> perspectives = manager.lookupBeans(PerspectiveActivity.class);
-    final Iterator<IOCBeanDef<PerspectiveActivity>> perspectivesIterator = perspectives.iterator();
+    System.out.println("PerspectiveActivity beans: " + perspectives);
 
-    while (perspectivesIterator.hasNext()) {
-      final IOCBeanDef<PerspectiveActivity> perspective = perspectivesIterator.next();
+    for (IOCBeanDef<PerspectiveActivity> perspective : perspectives) {
       final PerspectiveActivity instance = perspective.getInstance();
       if (instance.isDefault()) {
         defaultPerspective = instance;
@@ -155,6 +158,7 @@ public class ClientEntryPoint {
         manager.destroyBean(instance);
       }
     }
+    System.out.println("Returning defaultPerspective " + defaultPerspective);
     return defaultPerspective;
   }
 
@@ -178,9 +182,9 @@ public class ClientEntryPoint {
   }
 
   private Collection<WorkbenchScreenActivity> getScreenActivities() {
-
-    // Get Perspective Providers
-    return activityManager.getActivities(WorkbenchScreenActivity.class);
+    Set<WorkbenchScreenActivity> activities = activityManager.getActivities(WorkbenchScreenActivity.class);
+    System.out.println("getScreenActivities returning " + activities);
+    return activities;
   }
 
 }

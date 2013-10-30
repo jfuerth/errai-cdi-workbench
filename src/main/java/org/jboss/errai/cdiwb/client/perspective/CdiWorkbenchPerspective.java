@@ -11,16 +11,21 @@ import org.uberfire.workbench.model.PerspectiveDefinition;
 import org.uberfire.workbench.model.impl.PerspectiveDefinitionImpl;
 
 @Dependent
-@WorkbenchPerspective(identifier = "CdiWorkbenchPerspective")
+@WorkbenchPerspective(identifier = "CdiWorkbenchPerspective", isDefault = true)
 public class CdiWorkbenchPerspective {
 
-  @Perspective
-  public PerspectiveDefinition getDefinition() {
-    PerspectiveDefinitionImpl p = new PerspectiveDefinitionImpl();
-    p.setName("CDI Workbench");
-    return p;
+  public CdiWorkbenchPerspective() {
+    System.out.println("CdiWorkbenchPerspective created");
   }
 
+  @Perspective
+  public PerspectiveDefinition getDefinition12() {
+    PerspectiveDefinitionImpl p = new PerspectiveDefinitionImpl();
+    p.setName("CDI Workbench");
+
+    System.out.println("CdiWorkbenchPerspective returning perspective definition: " + p);
+    return p;
+  }
 
   @OnStartup
   public void onStartup() {

@@ -221,6 +221,17 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>target/generated-sources/annotations</directory>
+      </resource>
+    </resources>
     <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
     <plugins>
     
@@ -246,16 +257,16 @@
         <artifactId>gwt-maven-plugin</artifactId>
         <version>${maven.gwt.plugin.version}</version>
         <configuration>
-          <inplace>true</inplace>
           <noServer>true</noServer>
           <strict>true</strict> <!-- EEK. The HibernateValidator module contains non-translatable code. Need to disable strict compile. -->
           <runTarget>http://localhost:8080/${project.artifactId}/</runTarget>
           <extraJvmArgs>-Xmx1g -Xms756m -XX:MaxPermSize=256m -XX:CompileThreshold=1000</extraJvmArgs>
-          <hostedWebapp>src/main/webapp/</hostedWebapp>
           <logLevel>INFO</logLevel>
+          <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
         </configuration>
         <executions>
           <execution>
+          <id>gwt-compile</id>
             <goals>
               <goal>resources</goal>
               <goal>compile</goal>
@@ -267,6 +278,27 @@
             <goals>
               <goal>clean</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/classes</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>target/generated-sources/annotations</directory>
+                </resource>
+              </resources>
+            </configuration>
           </execution>
         </executions>
       </plugin>
