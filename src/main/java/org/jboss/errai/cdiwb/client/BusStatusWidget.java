@@ -167,4 +167,9 @@ public class BusStatusWidget extends Composite implements BusLifecycleListener {
         killHttpSessionButton.setEnabled(false);
         killQueueSessionButton.setEnabled(false);
     }
+
+    @Override
+    public String toString() {
+    return "BusStatusWidget!";
+    }
 }

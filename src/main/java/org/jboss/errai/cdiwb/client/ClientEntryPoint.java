@@ -30,7 +30,11 @@ import org.uberfire.workbench.model.menu.MenuItem;
 import org.uberfire.workbench.model.menu.MenuPosition;
 import org.uberfire.workbench.model.menu.Menus;
 
+import com.google.gwt.animation.client.Animation;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.RootPanel;
 
 @EntryPoint
 public class ClientEntryPoint {
@@ -85,6 +89,7 @@ public class ClientEntryPoint {
 
     menubar.addMenus(menus);
 
+    hideLoadingPopup();
     System.out.println("setupMenu is returning now");
   }
 
@@ -185,6 +190,27 @@ public class ClientEntryPoint {
     Set<WorkbenchScreenActivity> activities = activityManager.getActivities(WorkbenchScreenActivity.class);
     System.out.println("getScreenActivities returning " + activities);
     return activities;
+  }
+
+  /**
+   * Fades out the "Loading application" pop-up which was included in the host
+   * page by the UberFireServlet.
+   */
+  private void hideLoadingPopup() {
+      final Element e = RootPanel.get( "loading" ).getElement();
+
+      new Animation() {
+
+          @Override
+          protected void onUpdate( double progress ) {
+              e.getStyle().setOpacity( 1.0 - progress );
+          }
+
+          @Override
+          protected void onComplete() {
+              e.getStyle().setVisibility( Style.Visibility.HIDDEN );
+          }
+      }.run( 500 );
   }
 
 }

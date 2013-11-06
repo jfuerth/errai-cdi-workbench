@@ -8,8 +8,8 @@ import org.uberfire.lifecycle.OnClose;
 import org.uberfire.lifecycle.OnOpen;
 import org.uberfire.lifecycle.OnStartup;
 import org.uberfire.mvp.impl.DefaultPlaceRequest;
+import org.uberfire.workbench.model.PanelType;
 import org.uberfire.workbench.model.PerspectiveDefinition;
-import org.uberfire.workbench.model.impl.ContextDefinitionImpl;
 import org.uberfire.workbench.model.impl.PartDefinitionImpl;
 import org.uberfire.workbench.model.impl.PerspectiveDefinitionImpl;
 
@@ -22,13 +22,11 @@ public class CdiWorkbenchPerspective {
   }
 
   @Perspective
-  public PerspectiveDefinition getDefinition15() {
-    PerspectiveDefinitionImpl p = new PerspectiveDefinitionImpl();
+  public PerspectiveDefinition getDefinition16() {
+    PerspectiveDefinitionImpl p = new PerspectiveDefinitionImpl(PanelType.ROOT_LIST);
     p.setName("CDI Workbench");
 
-    p.setContextDefinition( new ContextDefinitionImpl( new DefaultPlaceRequest( "CdiWorkbenchContextPlaceRequest" ) ) );
-
-    p.getRoot().addPart( new PartDefinitionImpl( new DefaultPlaceRequest( "CdiWorkbenchRootPlaceRequest" ) ) );
+    p.getRoot().addPart( new PartDefinitionImpl( new DefaultPlaceRequest( "BusStatus" ) ) );
 
     System.out.println("CdiWorkbenchPerspective returning perspective definition: " + p);
     return p;
