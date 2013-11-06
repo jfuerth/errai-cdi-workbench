@@ -7,7 +7,7 @@ filter:
 
 exclude:
    - /*.ico
-   - /org.uberfire.UberfireShowcase/images/**
-   - /org.uberfire.UberfireShowcase/css/**
+   - /CdiWorkbench/images/**
+   - /CdiWorkbench/css/**
    - /css/**
    - /plugins/**

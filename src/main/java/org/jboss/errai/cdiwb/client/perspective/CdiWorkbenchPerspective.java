@@ -7,7 +7,10 @@ import org.uberfire.client.annotations.WorkbenchPerspective;
 import org.uberfire.lifecycle.OnClose;
 import org.uberfire.lifecycle.OnOpen;
 import org.uberfire.lifecycle.OnStartup;
+import org.uberfire.mvp.impl.DefaultPlaceRequest;
 import org.uberfire.workbench.model.PerspectiveDefinition;
+import org.uberfire.workbench.model.impl.ContextDefinitionImpl;
+import org.uberfire.workbench.model.impl.PartDefinitionImpl;
 import org.uberfire.workbench.model.impl.PerspectiveDefinitionImpl;
 
 @Dependent
@@ -19,9 +22,13 @@ public class CdiWorkbenchPerspective {
   }
 
   @Perspective
-  public PerspectiveDefinition getDefinition12() {
+  public PerspectiveDefinition getDefinition15() {
     PerspectiveDefinitionImpl p = new PerspectiveDefinitionImpl();
     p.setName("CDI Workbench");
+
+    p.setContextDefinition( new ContextDefinitionImpl( new DefaultPlaceRequest( "CdiWorkbenchContextPlaceRequest" ) ) );
+
+    p.getRoot().addPart( new PartDefinitionImpl( new DefaultPlaceRequest( "CdiWorkbenchRootPlaceRequest" ) ) );
 
     System.out.println("CdiWorkbenchPerspective returning perspective definition: " + p);
     return p;
@@ -35,6 +42,7 @@ public class CdiWorkbenchPerspective {
   @OnOpen
   public void onOpen() {
     System.out.println(this + " opening");
+    new Exception().printStackTrace(System.out);
   }
 
   @OnClose
