@@ -168,12 +168,12 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
+      <scope>provided</scope>
     </dependency>
     
     <!-- TODO figure out how to force all these things to provided scope without doing it explicitly in EVERY SINGLE ERRAI PROJECT!!!!111!!!!1 -->
     <!-- Don't deploy any of this -->
     <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><scope>provided</scope></dependency>
-    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-log4j12</artifactId><scope>provided</scope></dependency>
     <dependency><groupId>log4j</groupId><artifactId>log4j</artifactId><scope>provided</scope></dependency>
 
     <dependency><groupId>com.google.guava</groupId><artifactId>guava-gwt</artifactId><scope>provided</scope></dependency>
@@ -280,27 +280,6 @@
       </plugin>
 
       <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-resources</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${basedir}/target/classes</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>target/generated-sources/annotations</directory>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>${maven.war.plugin.version}</version>
@@ -359,6 +338,21 @@
                 </resource>
               </resources>
               <outputDirectory>src/main/webapp/css</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-resources</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/classes</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>target/generated-sources/annotations</directory>
+                </resource>
+              </resources>
             </configuration>
           </execution>
         </executions>
