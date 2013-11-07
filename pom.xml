@@ -50,7 +50,7 @@
     <jetty.version>6.1.25</jetty.version>
     <jboss-as-maven-plugin.version>7.4.Final</jboss-as-maven-plugin.version>
     <uberfire.version>0.4.0-SNAPSHOT</uberfire.version>
-    <errai.version>2.4.2-SNAPSHOT</errai.version>
+    <errai.version>2.4.3-SNAPSHOT</errai.version>
   </properties>
 
   <dependencyManagement>
