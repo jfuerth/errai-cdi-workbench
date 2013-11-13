@@ -276,13 +276,12 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>${maven.war.plugin.version}</version>
         <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
           <warName>${project.artifactId}</warName>
 
           <!-- Exclude GWT client local classes from the deployment, lest 
             classpath scanners such as Hibernate and Weld get confused when the webapp 
             is bootstrapping. -->
-          <packagingExcludes>**/javax/**/*.*,**/client/**/*.class</packagingExcludes>
+          <packagingExcludes>**/client/**/*.class</packagingExcludes>
         </configuration>
       </plugin>
 
@@ -339,12 +338,12 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/target/classes</outputDirectory>
               <resources>
                 <resource>
                   <directory>target/generated-sources/annotations</directory>
                 </resource>
               </resources>
+              <outputDirectory>${basedir}/target/classes</outputDirectory>
             </configuration>
           </execution>
         </executions>
