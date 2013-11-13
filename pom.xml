@@ -41,16 +41,15 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- maven plugin versions -->
     <maven.war.plugin.version>2.1.1</maven.war.plugin.version>
     <maven.clean.plugin.version>2.4.1</maven.clean.plugin.version>
     <maven.deploy.plugin.version>2.7</maven.deploy.plugin.version>
     <maven.resources.plugin.version>2.6</maven.resources.plugin.version>
     <maven.gwt.plugin.version>2.5.1</maven.gwt.plugin.version>
-    <jetty.version>6.1.25</jetty.version>
     <jboss-as-maven-plugin.version>7.4.Final</jboss-as-maven-plugin.version>
     <uberfire.version>0.4.0-SNAPSHOT</uberfire.version>
     <errai.version>2.4.3-SNAPSHOT</errai.version>
+    <jboss.spec.version>3.0.2.Final</jboss.spec.version>
   </properties>
 
   <dependencyManagement>
@@ -80,11 +79,10 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- Question: should a project have to import this too? Could errai-bom should import it recursively? -->
       <dependency>
         <groupId>org.jboss.spec</groupId>
         <artifactId>jboss-javaee-6.0</artifactId>
-        <version>3.0.2.Final</version> <!-- FIXME should use a property here I think -->
+        <version>${jboss.spec.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -171,8 +169,6 @@
       <scope>provided</scope>
     </dependency>
     
-    <!-- TODO figure out how to force all these things to provided scope without doing it explicitly in EVERY SINGLE ERRAI PROJECT!!!!111!!!!1 -->
-    <!-- Don't deploy any of this -->
     <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><scope>provided</scope></dependency>
     <dependency><groupId>log4j</groupId><artifactId>log4j</artifactId><scope>provided</scope></dependency>
 
@@ -206,9 +202,6 @@
     <dependency><groupId>org.jboss.weld</groupId><artifactId>weld-api</artifactId><scope>provided</scope></dependency>
     <dependency><groupId>org.jboss.weld</groupId><artifactId>weld-spi</artifactId><scope>provided</scope></dependency>
     <dependency><groupId>xml-apis</groupId><artifactId>xml-apis</artifactId><scope>provided</scope></dependency>
-
-    
-    <!-- These are pulled in transitively through errai-bus, but will be removed when we address ERRAI-534 -->
     <dependency><groupId>org.jboss.errai.io.netty</groupId><artifactId>netty</artifactId><scope>provided</scope></dependency>
 
     <!-- And finally, add this -->
@@ -259,7 +252,6 @@
           <runTarget>http://localhost:8080/${project.artifactId}/</runTarget>
           <extraJvmArgs>-Xmx1g -Xms756m -XX:MaxPermSize=256m -XX:CompileThreshold=1000</extraJvmArgs>
           <logLevel>INFO</logLevel>
-          <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
         </configuration>
         <executions>
           <execution>
@@ -308,7 +300,7 @@
                 <include>.errai/**</include>
                 <include>src/main/webapp/WEB-INF/deploy/**</include>
                 <include>src/main/webapp/WEB-INF/lib/**</include>
-                <include>src/main/webapp/App/**</include>
+                <include>src/main/webapp/CdiWorkbench/**</include>
                 <include>**/gwt-unitCache/**</include>
                 <include>**/*.JUnit/**</include>
                 <include>monitordb.*</include>
