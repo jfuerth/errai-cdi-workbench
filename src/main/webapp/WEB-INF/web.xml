@@ -2,15 +2,9 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         version="2.5">
-
-  <!-- TODO: determine if this context param is really necessary (it probably isn't) -->
-  <context-param>
-    <param-name>users.properties</param-name>
-    <param-value>/WEB-INF/users.properties</param-value>
-  </context-param>
-  
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+   
   <filter>
     <filter-name>UberFire Security Filter</filter-name>
     <filter-class>
